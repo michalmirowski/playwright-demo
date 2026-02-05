@@ -14,6 +14,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     baseURL: BASE_URL,
+    testIdAttribute: 'data-test',
     actionTimeout: 0,
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
