@@ -1,13 +1,24 @@
+import { MainPage } from '../src/pages/main.page';
 import { expect, test } from '@playwright/test';
 
-test('open contact page', async ({ page }) => {
-  // Arrange
-  await page.goto('/');
+test.describe('Verify navigation', () => {
+  let mainPage: MainPage;
 
-  // Act
-  await page.getByTestId('nav-contact').click();
+  test.beforeEach(async ({ page }) => {
+    mainPage = new MainPage(page);
+    await mainPage.goto();
+  });
 
-  // Assert
-  await expect.soft(page).toHaveTitle(/Contact Us/);
-  await expect(page.getByRole('heading', { name: 'Contact' })).toBeVisible();
+  test('open contact page', async ({}) => {
+    // Arrange
+    const expectedHeader = 'Contact Us';
+
+    // Act
+    const contactPage = await mainPage.clickContactLink();
+    await contactPage.waitForPageToLoadUrl();
+
+    // Assert
+    expect.soft(await contactPage.getTitle()).toContain(expectedHeader);
+    await expect(contactPage.contactFormHeader).toBeVisible();
+  });
 });
