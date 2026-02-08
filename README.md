@@ -1,5 +1,9 @@
 # Playwright demo
 
+Tests written in Typescript using Playwright framework.
+
+Tested application is a demo site [Practice Software Testing](https://practicesoftwaretesting.com/) created by [Testsmith](https://github.com/testsmith-io). You can find a source code [here](https://github.com/testsmith-io/practice-software-testing).
+
 ## Prepare
 
 ### Local recommended tools:
