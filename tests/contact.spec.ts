@@ -10,15 +10,14 @@ test.describe('Verify contact page', () => {
     await contactPage.goto();
   });
 
-  test('send message', async ({}) => {
+  test('send valid message', async ({}) => {
     // Arrange
     const expectedMessage =
       'Thanks for your message! We will contact you shortly.';
     const messageData = prepareRandomMessage();
 
     // Act
-    await contactPage.enterMessage(messageData);
-    await contactPage.sendButton.click();
+    await contactPage.sendMessage(messageData);
 
     // Assert
     await expect(contactPage.alertSuccess).toContainText(expectedMessage);
@@ -30,8 +29,7 @@ test.describe('Verify contact page', () => {
     const messageData = prepareRandomMessage(49);
 
     // Act
-    await contactPage.enterMessage(messageData);
-    await contactPage.sendButton.click();
+    await contactPage.sendMessage(messageData);
 
     // Assert
     await expect(contactPage.messageError).toContainText(expectedError);
@@ -44,8 +42,7 @@ test.describe('Verify contact page', () => {
     const messageData = prepareRandomMessage(251);
 
     // Act
-    await contactPage.enterMessage(messageData);
-    await contactPage.sendButton.click();
+    await contactPage.sendMessage(messageData);
 
     // Assert
     await expect(contactPage.alertDanger).toContainText(expectedError);
@@ -58,8 +55,7 @@ test.describe('Verify contact page', () => {
     messageData.message = '';
 
     // Act
-    await contactPage.enterMessage(messageData);
-    await contactPage.sendButton.click();
+    await contactPage.sendMessage(messageData);
 
     // Assert
     await expect(contactPage.messageError).toContainText(expectedError);

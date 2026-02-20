@@ -31,11 +31,13 @@ export class ContactPage extends BasePage {
     this.alertDanger = this.page.locator('.alert-danger');
   }
 
-  async enterMessage(message: MessageModel): Promise<void> {
+  async sendMessage(message: MessageModel): Promise<ContactPage> {
     await this.firstNameInput.fill(message.firstName);
     await this.lastNameInput.fill(message.lastName);
     await this.emailInput.fill(message.email);
     await this.subjectInput.selectOption(message.subject);
     await this.messageInput.fill(message.message);
+    await this.sendButton.click();
+    return new ContactPage(this.page);
   }
 }
